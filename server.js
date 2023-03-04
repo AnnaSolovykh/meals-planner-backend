@@ -23,7 +23,3 @@ app.use(routes)
 app.listen(PORT, () => {
     console.log( `I AM LISTENING ON PORT${PORT}` )
 })
-
-//rapnuta 
-//WkxwSFZkvDFAYFmT
-//mongodb+srv://rapnuta:<password>@cluster0.7fiys0j.mongodb.net/?retryWrites=true&w=majority
