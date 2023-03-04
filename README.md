@@ -2,7 +2,7 @@
 
 Demo: https://meal-planner-roan.vercel.app 
 
-Frontend part is here: https://github.com/AnnaSolovykh/meal-planner-frontend/edit/main/README.md
+Frontend part is here: https://github.com/AnnaSolovykh/meal-planner-frontend/
 
 This is a project build with React, Node.js and MongoDB.
 You can add a meal, than edit it in the input field or delete it.
