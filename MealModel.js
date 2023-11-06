@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const mealSchema = new mongoose.Schema({
-    name: {
+    title: {
         type: String, 
         required: [true, 'name must be provided'],
         trim: true,
