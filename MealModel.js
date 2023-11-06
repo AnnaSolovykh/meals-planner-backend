@@ -1,11 +1,16 @@
 const mongoose = require('mongoose');
 
 const mealSchema = new mongoose.Schema({
-    title: {
-        type: String, //названия меню буду в текстовой форме
-        required: true, //нужен валидатор required, что  поле было задано перед сохранением, чтобы данные из поля были сохранены
+    name: {
+        type: String, 
+        required: [true, 'name must be provided'],
+        trim: true,
+        maxlength: [20, 'the name of the meal should not be longer than 20 characters']
+    },
+    completed: {
+        type: Boolean,
+        default: false
     }
 })
 
 module.exports = mongoose.model('Meal', mealSchema)
-//first name is the unique name for the collection, the second one is the schema name)

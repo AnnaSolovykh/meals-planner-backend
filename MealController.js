@@ -1,33 +1,50 @@
-const MealModel = require('./MealModel');
-//соединяем, потому модель и контроллер должны общаться друг с другом, чтобы иметь доступ к тому,что пишем
+const Meal = require('./MealModel');
 
-//get
+const getAllMeals = async (req, res) => {
+    try {
+        const meals = await Meal.find({});
+        res.status(200).json({ meals });
+    } catch (error) {
+        res.status(500).json({ msg: error });
+    }
+};
 
-module.exports.getMeal = async(req, res) => {//получаем рецепты
-    const myMeal = await MealModel.find();//в моделе будем искать рецепт 
-    res.send(myMeal)
-}
+const createMeal = async (req, res) => {
+    try {
+        const meal = await Meal.create(req.body)
+        res.status(201).json({ meal })
+    } catch (error) {
+        res.status(500).json({ msg: error });
+    }
+};
 
-//post
-module.exports.saveMeals = async (req, res) => {//и можем их сохранять
-    const { title } = req.body;
-    MealModel.create( {title} )
-    .then ((data) => {
-        console.log('Meal added')
-        res.send(data)
-    })
-}
+const deleteMeal = async (req, res) => {
+    try {
+        const { id: mealId } = req.params;
+        const meal = await Meal.findOneAndDelete({ _id: mealId });
+        res.status(200).json({ meal });
 
-//delete
-module.exports.deleteMeal = async (req, res) => {
-    const { _id } = req.body;
-    MealModel.findByIdAndDelete(_id)
-    .then (()=> res.send('Deleted a meal'))
-}
+    } catch (error) {
+        res.status(500).json({ msg: error });
+    }
+};
 
-//edit
-module.exports.editMeal = async (req, res) => {
-    const { _id, title } = req.body;
-    MealModel.findByIdAndUpdate( _id, {title}) 
-    .then (()=> res.send('Edited a meal'))
+const editMeal = async (req, res) => {
+    try {
+        const { id: mealId }  = req.params;
+        const meal = await Meal.findOneAndUpdate({ _id: mealId }, req.body, {
+            new: true,
+            runValidators: true
+        });
+        res.status(200).json({ meal })
+    } catch (error) {
+        res.status(500).json({ msg: error });
+    }
+};
+
+module.exports = {
+    getAllMeals,
+    createMeal,
+    deleteMeal,
+    editMeal
 }

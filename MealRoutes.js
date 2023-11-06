@@ -1,11 +1,13 @@
-const { Router } = require('express');
-const { getMeal, saveMeals, deleteMeal, editMeal } = require('./MealController');
+const express = require('express');
+const router = express.Router();
+const {    
+    getAllMeals, 
+    createMeal, 
+    deleteMeal, 
+    editMeal 
+} = require('./MealController');
 
-const router = Router();
-
-router.get('/', getMeal);
-router.post('/saveMeals', saveMeals);
-router.post('/deleteMeal', deleteMeal);
-router.put('/editMeal', editMeal)
+router.route('/').get(getAllMeals).post(createMeal);
+router.route('/:id').delete(deleteMeal).patch(editMeal);
 
 module.exports = router;
